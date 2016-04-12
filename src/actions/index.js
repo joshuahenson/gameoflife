@@ -1,6 +1,5 @@
-export const updateBoard = () => {
-    console.log('updateBoard action');
+export function updateBoard() {
   return {
-    type: 'UPDATE_BOARD'
+    type: 'UPDATE_BOARD',
   };
-};
+}

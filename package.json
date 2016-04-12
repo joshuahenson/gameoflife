@@ -6,6 +6,7 @@
   "repository": "",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "c9": "webpack-dev-server  --host $IP --port $PORT",
     "lint": "eslint src; exit 0",
     "clean": "rimraf dist",
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors"

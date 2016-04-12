@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 let key = 0;
 const BoardRow = ({ row }) => (
@@ -9,6 +9,6 @@ const BoardRow = ({ row }) => (
   </div>
 )
 
-BoardRow.propTypes = { row: React.PropTypes.array.isRequired }
+BoardRow.propTypes = { row: PropTypes.array.isRequired }
 
 export default BoardRow

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BoardRow from '../components/board-row';
 // import { action } from "../actions/index";
@@ -18,7 +18,7 @@ export default class Board extends Component {
   }
 }
 
-Board.propTypes = { board: React.PropTypes.array.isRequired }
+Board.propTypes = { board: PropTypes.array.isRequired }
 
 function mapStateToProps(state) {
   return { board: state.board }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BoardRow from '../components/board-row';
-import { updateBoard } from '../actions/index';
+import { updateBoard, newBoard } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 export default class Board extends Component {
@@ -19,6 +19,9 @@ export default class Board extends Component {
           <button onClick={ () => this.props.updateBoard() }>
             Update Board {/* prototyping */}
           </button>
+          <button onClick={ () => this.props.newBoard(35) }>
+            Test Size {/* prototyping */}
+          </button>
         </div>
       </div>
     );
@@ -28,6 +31,7 @@ export default class Board extends Component {
 Board.propTypes = {
   board: PropTypes.array.isRequired,
   updateBoard: PropTypes.func,
+  newBoard: PropTypes.func,
 }
 
 function mapStateToProps(state) {
@@ -35,7 +39,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateBoard }, dispatch)
+  return bindActionCreators({ updateBoard, newBoard }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

@@ -13,8 +13,6 @@ const randomBoard = (range) => {
   return arr;
 }
 
-const tempRange = 25
-
 // counts number of living cells surrounding cell and determines
 // if cell lives or dies
 const cellStatus = (array, rowInd, cellInd, range, cell) => {
@@ -58,15 +56,20 @@ const cellStatus = (array, rowInd, cellInd, range, cell) => {
   return 0;
 }
 
+const tempRange = 25
+
 const board = (state = randomBoard(tempRange), action) => {
   switch (action.type) {
+    case 'NEW_BOARD':
+      return (
+        randomBoard(action.size)
+      );
     case 'UPDATE_BOARD':
       return state.map((row, rowIndex) =>
         row.map((cell, cellIndex) =>
           cellStatus(state, rowIndex, cellIndex, tempRange, cell)
         )
-      )
-
+      );
     default:
       return state;
   }

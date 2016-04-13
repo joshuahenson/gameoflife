@@ -1,13 +1,19 @@
-// temp data for testing
-const initialState = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 1, 0, 0],
-  [0, 0, 1, 0, 0],
-  [0, 0, 1, 0, 0],
-]
 
-const tempRange = 5
+// takes dimensions to populate gameboard using random choice
+// todo tweak ratio of alive/dead
+const randomBoard = (range) => {
+  let arr = []
+  for(let i = 0; i < range; i++) {
+    let arr1 = []
+    for(let i = 0; i < range; i++) {
+      arr1.push(Math.random() < 0.8 ? 0 : 1)
+    }
+    arr.push(arr1)
+  }
+  return arr;
+}
+
+const tempRange = 25
 
 const cellStatus = (array, rowIndex, cellIndex, range, cell) => {
   let count = 0;
@@ -49,7 +55,7 @@ const cellStatus = (array, rowIndex, cellIndex, range, cell) => {
   }
 }
 
-const board = (state = initialState, action) => {
+const board = (state = randomBoard(tempRange), action) => {
   switch (action.type) {
     case 'UPDATE_BOARD':
       return state.map((row, rowIndex) => {

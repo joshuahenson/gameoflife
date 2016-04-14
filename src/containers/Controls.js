@@ -8,7 +8,7 @@ export default class Controls extends Component {
     this.toggleInterval();
   }
   componentWillUnmount() {
-    this.toggleInterval();
+    clearInterval(this.interval);
   }
   toggleInterval() {
     this.props.togglePlay();

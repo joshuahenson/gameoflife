@@ -1,31 +1,37 @@
+$cellBorder: white;
+$board: darkGray;
+$alive: #bada55;
+$dead: gray;
+
 .container {
   text-align:center;
 }
 
 .board {
-  background-color: darkGray;
+  background-color: $board;
   padding: 5px;
   display: inline-block;
-
+  // width: 250px;
 }
 .alive, .dead {
   width: 10px;
   height: 10px;
-  outline: 1px solid white;
+  outline: 1px solid $cellBorder;
   float: left;
 }
 .dead {
-  background-color: gray;
+  background-color: $dead;
 }
 .alive {
-  background-color: #bada55;
+  background-color: $alive;
 }
-.row:before,
-.row:after {
+
+.row:before {
   content: "";
   display: table;
 }
 
 .row:after {
+  @extend .row:before;
   clear: both;
 }

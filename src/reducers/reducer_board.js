@@ -70,6 +70,12 @@ const board = (state = randomBoard(tempRange), action) => {
           cellStatus(state, rowIndex, cellIndex, tempRange, cell)
         )
       );
+    case 'CLEAR_BOARD':
+      return state.map((row) =>
+        row.map(() =>
+          0
+        )
+      );
     default:
       return state;
   }

@@ -4,6 +4,12 @@ export function updateBoard() {
   };
 }
 
+export function clearBoard() {
+  return {
+    type: 'CLEAR_BOARD',
+  };
+}
+
 export function newBoard(size) {
   return {
     type: 'NEW_BOARD',

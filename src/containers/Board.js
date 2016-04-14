@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BoardRow from '../components/BoardRow';
-import { updateBoard, newBoard } from '../actions/index';
-import { bindActionCreators } from 'redux';
+// import { updateBoard, newBoard } from '../actions/index';
+// import { bindActionCreators } from 'redux';
 
 export default class Board extends Component {
   render() {
@@ -15,31 +15,22 @@ export default class Board extends Component {
             )
           }
         </div>
-        <div className="row">
-          <button onClick={ () => this.props.updateBoard() }>
-            Update Board {/* prototyping */}
-          </button>
-          <button onClick={ () => this.props.newBoard(35) }>
-            Test Size {/* prototyping */}
-          </button>
-        </div>
       </div>
     );
   }
 }
 
 Board.propTypes = {
-  board: PropTypes.array.isRequired,
-  updateBoard: PropTypes.func,
-  newBoard: PropTypes.func
+  board: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return { board: state.board };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateBoard, newBoard }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ updateBoard, newBoard }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+// export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps, null)(Board);// do i need null?

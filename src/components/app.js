@@ -3,6 +3,6 @@ import Board from '../containers/board';
 
 const App = () => (
   <Board />
-)
+);
 
-export default App
+export default App;

@@ -2,16 +2,16 @@
 // takes dimensions to populate gameboard using random choice
 // todo tweak ratio of alive/dead
 const randomBoard = (range) => {
-  const arr = []
+  const arr = [];
   for (let i = 0; i < range; i++) {
-    const arr1 = []
+    const arr1 = [];
     for (let j = 0; j < range; j++) {
-      arr1.push(Math.random() < 0.8 ? 0 : 1)
+      arr1.push(Math.random() < 0.8 ? 0 : 1);
     }
-    arr.push(arr1)
+    arr.push(arr1);
   }
   return arr;
-}
+};
 
 // counts number of living cells surrounding cell and determines
 // if cell lives or dies
@@ -54,9 +54,9 @@ const cellStatus = (array, rowInd, cellInd, range, cell) => {
     return 1;
   } // else
   return 0;
-}
+};
 
-const tempRange = 25
+const tempRange = 25;
 
 const board = (state = randomBoard(tempRange), action) => {
   switch (action.type) {

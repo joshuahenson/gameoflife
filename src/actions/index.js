@@ -7,6 +7,6 @@ export function updateBoard() {
 export function newBoard(size) {
   return {
     type: 'NEW_BOARD',
-    size,
+    size
   };
 }

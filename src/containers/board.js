@@ -4,6 +4,8 @@ import BoardRow from '../components/board-row';
 import { updateBoard, newBoard } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
+// I'm not sure if I want eslint to worry about stateless functions yet
+/* eslint react/prefer-stateless-function: 0*/
 export default class Board extends Component {
   render() {
     return (
@@ -31,15 +33,15 @@ export default class Board extends Component {
 Board.propTypes = {
   board: PropTypes.array.isRequired,
   updateBoard: PropTypes.func,
-  newBoard: PropTypes.func,
-}
+  newBoard: PropTypes.func
+};
 
 function mapStateToProps(state) {
-  return { board: state.board }
+  return { board: state.board };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateBoard, newBoard }, dispatch)
+  return bindActionCreators({ updateBoard, newBoard }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

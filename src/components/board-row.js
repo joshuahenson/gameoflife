@@ -7,8 +7,8 @@ const BoardRow = ({ row }) => (
       <div key={key++} className={cell ? 'alive' : 'dead'} />
     )}
   </div>
-)
+);
 
-BoardRow.propTypes = { row: PropTypes.array.isRequired }
+BoardRow.propTypes = { row: PropTypes.array.isRequired };
 
-export default BoardRow
+export default BoardRow;

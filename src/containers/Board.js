@@ -4,8 +4,6 @@ import BoardRow from '../components/BoardRow';
 import { updateBoard, newBoard } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-// I'm not sure if I want eslint to worry about stateless functions yet
-/* eslint react/prefer-stateless-function: 0*/
 export default class Board extends Component {
   render() {
     return (

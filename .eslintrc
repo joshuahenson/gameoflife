@@ -19,6 +19,7 @@
         "no-this-before-super": 1,
         "constructor-super": 1,
         "func-names": 0,
-        "comma-dangle": 0
+        "comma-dangle": 0,
+        "react/prefer-stateless-function": 0
     }
 }

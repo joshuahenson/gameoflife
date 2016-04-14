@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BoardRow from '../components/BoardRow';
-// import { updateBoard, newBoard } from '../actions/index';
+// import { updateBoard } from '../actions/index';
 // import { bindActionCreators } from 'redux';
 
 export default class Board extends Component {
@@ -25,12 +25,14 @@ Board.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { board: state.board };
+  return {
+    board: state.board
+  };
 }
 
 // function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ updateBoard, newBoard }, dispatch);
+//   return bindActionCreators({ updateBoard }, dispatch);
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Board);
-export default connect(mapStateToProps, null)(Board);// do i need null?
+export default connect(mapStateToProps)(Board);

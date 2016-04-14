@@ -16,3 +16,9 @@ export function newBoard(size) {
     size
   };
 }
+
+export function togglePlay() {
+  return {
+    type: 'TOGGLE_PLAY',
+  };
+}

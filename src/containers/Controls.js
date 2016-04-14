@@ -4,11 +4,25 @@ import { updateBoard, togglePlay, clearBoard, newBoard } from '../actions/index'
 import { bindActionCreators } from 'redux';
 
 export default class Controls extends Component {
+  componentDidMount() {
+    this.toggleInterval();
+  }
+  componentWillUnmount() {
+    this.toggleInterval();
+  }
+  toggleInterval() {
+    this.props.togglePlay();
+    if (!this.props.paused) {
+      this.interval = setInterval(() => this.props.updateBoard(), 1000);
+    } else {
+      clearInterval(this.interval);
+    }
+  }
   render() {
     return (
       <div>
         <div className="row">
-          <button onClick={ () => this.props.togglePlay() }>
+          <button onClick={ () => this.toggleInterval() }>
             Run/Pause
           </button>
           <button onClick={ () => this.props.clearBoard() }>
@@ -30,6 +44,7 @@ export default class Controls extends Component {
 
 Controls.propTypes = {
   togglePlay: PropTypes.func,
+  paused: PropTypes.bool.isRequired,
   clearBoard: PropTypes.func,
   newBoard: PropTypes.func,
   updateBoard: PropTypes.func

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import BoardRow from '../components/board-row';
+import BoardRow from '../components/BoardRow';
 import { updateBoard, newBoard } from '../actions/index';
 import { bindActionCreators } from 'redux';
 

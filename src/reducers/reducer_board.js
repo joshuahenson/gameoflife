@@ -50,7 +50,7 @@ const cellStatus = (array, index, width, cell) => {
   return 0;
 };
 
-const board = (state = randomBoard(60), action) => {
+const board = (state = randomBoard(55), action) => {
   switch (action.type) {
     case 'NEW_BOARD':
       return (
@@ -64,6 +64,12 @@ const board = (state = randomBoard(60), action) => {
       return state.map(() =>
         0
       );
+    case 'TOGGLE_CELL':
+      return [
+        ...state.slice(0, action.index),
+        + !state[action.index],
+        ...state.slice(action.index + 1)
+      ];
     default:
       return state;
   }

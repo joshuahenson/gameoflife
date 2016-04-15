@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import { updateBoard } from '../actions/index';
-// import { bindActionCreators } from 'redux';
+import { toggleCell } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 export default class Board extends Component {
   determineClass(index, width, cell) {
@@ -22,6 +22,7 @@ export default class Board extends Component {
         {
           this.props.board.map((cell, index) =>
             <div
+              onClick={ () => this.props.toggleCell(index) }
               key={index}
               id={index}
               className={ this.determineClass(index, this.props.size, cell) }
@@ -35,7 +36,8 @@ export default class Board extends Component {
 
 Board.propTypes = {
   board: PropTypes.array.isRequired,
-  size: PropTypes.number
+  size: PropTypes.number,
+  toggleCell: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -45,9 +47,8 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ updateBoard }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleCell }, dispatch);
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Board);
-export default connect(mapStateToProps)(Board);
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

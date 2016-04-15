@@ -1,4 +1,4 @@
-const size = (state = 60, action) => {
+const size = (state = 55, action) => {
   switch (action.type) {
     case 'SET_SIZE':
       return (

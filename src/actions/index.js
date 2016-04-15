@@ -43,3 +43,10 @@ export function setSpeed(speed) {
     speed
   };
 }
+
+export function toggleCell(index) {
+  return {
+    type: 'TOGGLE_CELL',
+    index
+  };
+}

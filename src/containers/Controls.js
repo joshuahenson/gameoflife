@@ -55,11 +55,11 @@ export default class Controls extends Component {
           <button disabled={this.props.size === 30} onClick={ () => this.newBoard(30) }>
             30x30
           </button>
-          <button disabled={this.props.size === 60} onClick={ () => this.newBoard(60) }>
-            60x60
+          <button disabled={this.props.size === 55} onClick={ () => this.newBoard(55) }>
+            55x55
           </button>
-          <button disabled={this.props.size === 90} onClick={ () => this.newBoard(90) }>
-            90x90
+          <button disabled={this.props.size === 75} onClick={ () => this.newBoard(75) }>
+            75x75
           </button>
         </div>
         <div className="row">

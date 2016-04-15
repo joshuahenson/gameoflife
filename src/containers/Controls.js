@@ -13,10 +13,14 @@ export default class Controls extends Component {
   toggleInterval() {
     this.props.togglePlay();
     if (!this.props.paused) {
-      this.interval = setInterval(() => this.props.updateBoard(), 1000);
+      this.interval = setInterval(() => this.props.updateBoard(this.props.size), 1000);
     } else {
       clearInterval(this.interval);
     }
+  }
+  clearBoard() {
+    clearInterval(this.interval);
+    this.props.clearBoard();
   }
   render() {
     return (
@@ -25,12 +29,12 @@ export default class Controls extends Component {
           <button onClick={ () => this.toggleInterval() }>
             Run/Pause
           </button>
-          <button onClick={ () => this.props.clearBoard() }>
+          <button onClick={ () => this.clearBoard() }>
             Clear
           </button>
         </div>
         <div className="row">{/* prototyping */}
-          <button onClick={ () => this.props.updateBoard() }>
+          <button onClick={ () => this.props.updateBoard(this.props.size) }>
             Update Board
           </button>
           <button onClick={ () => this.props.newBoard(35) }>
@@ -47,12 +51,14 @@ Controls.propTypes = {
   paused: PropTypes.bool.isRequired,
   clearBoard: PropTypes.func,
   newBoard: PropTypes.func,
-  updateBoard: PropTypes.func
+  updateBoard: PropTypes.func,
+  size: PropTypes.number
 };
 
 function mapStateToProps(state) {
   return {
-    paused: state.paused
+    paused: state.paused,
+    size: state.size
   };
 }
 

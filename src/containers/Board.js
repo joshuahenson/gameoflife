@@ -8,24 +8,23 @@ export default class Board extends Component {
     if (cell) {
       if (index % width === 0) {
         return 'clear alive';
-      } //else not new row
+      } // else not new row
       return 'alive';
     } // else !cell
     if (index % width === 0) {
       return 'clear dead';
-    } //else not new row
+    } // else not new row
     return 'dead';
   }
   render() {
-    const tempWidth = 25;
     return (
       <div className="board">
         {
           this.props.board.map((cell, index) =>
-            <div 
-              key={index} 
-              id={index} 
-              className={ this.determineClass(index, tempWidth, cell) } 
+            <div
+              key={index}
+              id={index}
+              className={ this.determineClass(index, this.props.size, cell) }
             />
           )
         }
@@ -35,12 +34,14 @@ export default class Board extends Component {
 }
 
 Board.propTypes = {
-  board: PropTypes.array.isRequired
+  board: PropTypes.array.isRequired,
+  size: PropTypes.number
 };
 
 function mapStateToProps(state) {
   return {
-    board: state.board
+    board: state.board,
+    size: state.size
   };
 }
 

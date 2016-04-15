@@ -1,6 +1,7 @@
-export function updateBoard() {
+export function updateBoard(size) {
   return {
     type: 'UPDATE_BOARD',
+    size
   };
 }
 
@@ -19,6 +20,13 @@ export function newBoard(size) {
 
 export function togglePlay() {
   return {
-    type: 'TOGGLE_PLAY',
+    type: 'TOGGLE_PLAY'
+  };
+}
+
+export function setSize(size) {
+  return {
+    type: 'SET_SIZE',
+    size
   };
 }

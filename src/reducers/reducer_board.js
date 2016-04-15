@@ -14,36 +14,35 @@ const randomBoard = (width) => {
 const cellStatus = (array, index, width, cell) => {
   let count = 0;
   let surroundingIndexes = [];
-  let arrLength = array.length;
+  const arrLength = array.length;
   if (index < width) {
     surroundingIndexes = [
-      index - width -1 + arrLength,
+      index - width - 1 + arrLength,
       index - width + arrLength,
       index - width + 1 + arrLength,
       index - 1,
       index + 1,
-      index + width -1,
+      index + width - 1,
       index + width,
       index + width + 1
     ];
   } else {
     surroundingIndexes = [
-      index - width -1,
+      index - width - 1,
       index - width,
       index - width + 1,
       index - 1,
       index + 1,
-      (index + width -1) % arrLength,
+      (index + width - 1) % arrLength,
       (index + width) % arrLength,
       (index + width + 1) % arrLength
-    ];    
+    ];
   }
   surroundingIndexes.forEach((idx) => {
     if (array[idx]) {
       count++;
     }
   });
-
   // todo: refactor to show if continuing to live or die?????
   if (count === 3 || count === 2 && cell) {
     return 1;
@@ -51,9 +50,7 @@ const cellStatus = (array, index, width, cell) => {
   return 0;
 };
 
-const tempRange = 25;
-
-const board = (state = randomBoard(tempRange), action) => {
+const board = (state = randomBoard(60), action) => {
   switch (action.type) {
     case 'NEW_BOARD':
       return (
@@ -61,10 +58,10 @@ const board = (state = randomBoard(tempRange), action) => {
       );
     case 'UPDATE_BOARD':
       return state.map((cell, index) =>
-        cellStatus(state, index, tempRange, cell)
+        cellStatus(state, index, action.size, cell)
       );
     case 'CLEAR_BOARD':
-      return state.map((cell) =>
+      return state.map(() =>
         0
       );
     default:

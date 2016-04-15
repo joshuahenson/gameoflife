@@ -41,10 +41,10 @@ export default class Controls extends Component {
     return (
       <div>
         <div className="row">
-          <button onClick={ () => this.play() }>
+          <button disabled={this.props.playing} onClick={ () => this.play() }>
             Play
           </button>
-          <button onClick={ () => this.pause() }>
+          <button disabled={!this.props.playing}onClick={ () => this.pause() }>
             Pause
           </button>
           <button onClick={ () => this.clearBoard() }>
@@ -52,24 +52,24 @@ export default class Controls extends Component {
           </button>
         </div>
         <div className="row">
-          <button onClick={ () => this.newBoard(30) }>
+          <button disabled={this.props.size === 30} onClick={ () => this.newBoard(30) }>
             30x30
           </button>
-          <button onClick={ () => this.newBoard(60) }>
+          <button disabled={this.props.size === 60} onClick={ () => this.newBoard(60) }>
             60x60
           </button>
-          <button onClick={ () => this.newBoard(90) }>
+          <button disabled={this.props.size === 90} onClick={ () => this.newBoard(90) }>
             90x90
           </button>
         </div>
         <div className="row">
-          <button onClick={ () => this.setSpeed(1000) }>
+          <button disabled={this.props.speed === 1000} onClick={ () => this.setSpeed(1000) }>
             Slow
           </button>
-          <button onClick={ () => this.setSpeed(500) }>
+          <button disabled={this.props.speed === 500} onClick={ () => this.setSpeed(500) }>
             Medium
           </button>
-          <button onClick={ () => this.setSpeed(50) }>
+          <button disabled={this.props.speed === 50} onClick={ () => this.setSpeed(50) }>
             Fast
           </button>
         </div>

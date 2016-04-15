@@ -1,0 +1,5 @@
+add onClick to cell
+
+add generation counter display
+
+style app

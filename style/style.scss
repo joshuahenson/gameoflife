@@ -11,7 +11,6 @@ $dead: gray;
   background-color: $board;
   padding: 5px;
   display: inline-block;
-  // width: 250px;
 }
 .alive, .dead {
   width: 10px;
@@ -25,13 +24,6 @@ $dead: gray;
 .alive {
   background-color: $alive;
 }
-
-.row:before {
-  content: "";
-  display: table;
-}
-
-.row:after {
-  @extend .row:before;
+.clear {
   clear: both;
 }

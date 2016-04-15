@@ -1,20 +1,34 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import BoardRow from '../components/BoardRow';
 // import { updateBoard } from '../actions/index';
 // import { bindActionCreators } from 'redux';
 
 export default class Board extends Component {
+  determineClass(index, width, cell) {
+    if (cell) {
+      if (index % width === 0) {
+        return 'clear alive';
+      } //else not new row
+      return 'alive';
+    } // else !cell
+    if (index % width === 0) {
+      return 'clear dead';
+    } //else not new row
+    return 'dead';
+  }
   render() {
+    const tempWidth = 25;
     return (
-      <div>
-        <div className="board">
-          {
-            this.props.board.map((row, index) =>
-              <BoardRow key={index} row={row} />
-            )
-          }
-        </div>
+      <div className="board">
+        {
+          this.props.board.map((cell, index) =>
+            <div 
+              key={index} 
+              id={index} 
+              className={ this.determineClass(index, tempWidth, cell) } 
+            />
+          )
+        }
       </div>
     );
   }

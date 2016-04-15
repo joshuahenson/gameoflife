@@ -27,7 +27,8 @@ export default class Controls extends Component {
   play(speed) {
     this.props.play();
     this.interval = setInterval(() =>
-      this.props.updateBoard(this.props.size), speed || this.props.speed);
+      this.props.updateBoard(this.props.size)
+    , speed || this.props.speed);
   }
   clearBoard() {
     this.pause();
@@ -40,6 +41,9 @@ export default class Controls extends Component {
   render() {
     return (
       <div>
+        <div className="generation">
+          { `Generation: ${this.props.generation}` }
+        </div>
         <div className="row">
           <button disabled={this.props.playing} onClick={ () => this.play() }>
             Play
@@ -88,14 +92,16 @@ Controls.propTypes = {
   size: PropTypes.number,
   setSize: PropTypes.func,
   setSpeed: PropTypes.func,
-  speed: PropTypes.number
+  speed: PropTypes.number,
+  generation: PropTypes.number
 };
 
 function mapStateToProps(state) {
   return {
     playing: state.playing,
     size: state.size,
-    speed: state.speed
+    speed: state.speed,
+    generation: state.generation
   };
 }
 

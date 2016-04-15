@@ -4,6 +4,10 @@ const paused = (state = false, action) => {
       return (
         !state
       );
+    case 'PAUSE_PLAY':
+      return (
+        true
+      );
     default:
       return state;
   }

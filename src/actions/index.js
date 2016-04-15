@@ -24,9 +24,22 @@ export function togglePlay() {
   };
 }
 
+export function pausePlay() {
+  return {
+    type: 'PAUSE_PLAY'
+  };
+}
+
 export function setSize(size) {
   return {
     type: 'SET_SIZE',
     size
+  };
+}
+
+export function setSpeed(speed) {
+  return {
+    type: 'SET_SPEED',
+    speed
   };
 }

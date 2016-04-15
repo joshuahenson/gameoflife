@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updateBoard, togglePlay, clearBoard, newBoard } from '../actions/index';
+import { updateBoard, togglePlay, clearBoard, newBoard, setSize } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 export default class Controls extends Component {
@@ -13,10 +13,18 @@ export default class Controls extends Component {
   toggleInterval() {
     this.props.togglePlay();
     if (!this.props.paused) {
-      this.interval = setInterval(() => this.props.updateBoard(), 1000);
+      this.interval = setInterval(() => this.props.updateBoard(this.props.size), 1000);
     } else {
       clearInterval(this.interval);
     }
+  }
+  clearBoard() {
+    clearInterval(this.interval);
+    this.props.clearBoard();
+  }
+  newBoard(size) {
+    this.props.setSize(size);
+    this.props.newBoard(size);
   }
   render() {
     return (
@@ -25,16 +33,19 @@ export default class Controls extends Component {
           <button onClick={ () => this.toggleInterval() }>
             Run/Pause
           </button>
-          <button onClick={ () => this.props.clearBoard() }>
+          <button onClick={ () => this.clearBoard() }>
             Clear
           </button>
         </div>
-        <div className="row">{/* prototyping */}
-          <button onClick={ () => this.props.updateBoard() }>
-            Update Board
+        <div className="row">
+          <button onClick={ () => this.newBoard(30) }>
+            Small
           </button>
-          <button onClick={ () => this.props.newBoard(35) }>
-            Test Size
+          <button onClick={ () => this.newBoard(60) }>
+            Medium
+          </button>
+          <button onClick={ () => this.newBoard(90) }>
+            Large
           </button>
         </div>
       </div>
@@ -47,12 +58,15 @@ Controls.propTypes = {
   paused: PropTypes.bool.isRequired,
   clearBoard: PropTypes.func,
   newBoard: PropTypes.func,
-  updateBoard: PropTypes.func
+  updateBoard: PropTypes.func,
+  size: PropTypes.number,
+  setSize: PropTypes.func
 };
 
 function mapStateToProps(state) {
   return {
-    paused: state.paused
+    paused: state.paused,
+    size: state.size
   };
 }
 
@@ -61,7 +75,8 @@ function mapDispatchToProps(dispatch) {
     togglePlay,
     clearBoard,
     newBoard,
-    updateBoard
+    updateBoard,
+    setSize
   }, dispatch);
 }
 

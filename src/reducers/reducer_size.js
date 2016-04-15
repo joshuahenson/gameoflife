@@ -1,0 +1,12 @@
+const size = (state = 60, action) => {
+  switch (action.type) {
+    case 'SET_SIZE':
+      return (
+        action.size
+      );
+    default:
+      return state;
+  }
+};
+
+export default size;

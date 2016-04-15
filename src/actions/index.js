@@ -18,9 +18,15 @@ export function newBoard(size) {
   };
 }
 
-export function togglePlay() {
+export function play() {
   return {
-    type: 'TOGGLE_PLAY'
+    type: 'PLAY'
+  };
+}
+
+export function pause() {
+  return {
+    type: 'PAUSE'
   };
 }
 
@@ -28,5 +34,12 @@ export function setSize(size) {
   return {
     type: 'SET_SIZE',
     size
+  };
+}
+
+export function setSpeed(speed) {
+  return {
+    type: 'SET_SPEED',
+    speed
   };
 }

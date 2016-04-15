@@ -1,28 +1,40 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updateBoard, togglePlay, clearBoard, newBoard, setSize } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import {
+  updateBoard, play, clearBoard, newBoard, setSize, setSpeed, pause
+} from '../actions/index';
 
 export default class Controls extends Component {
   componentDidMount() {
-    this.toggleInterval();
+    this.play();
   }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  toggleInterval() {
-    this.props.togglePlay();
-    if (!this.props.paused) {
-      this.interval = setInterval(() => this.props.updateBoard(this.props.size), 1000);
-    } else {
-      clearInterval(this.interval);
+  setSpeed(speed) {
+    if (this.props.playing) {
+      this.pause();
+      this.props.setSpeed(speed);
+      this.play(speed);
     }
+    this.props.setSpeed(speed);
+  }
+  pause() {
+    this.props.pause();
+    clearInterval(this.interval);
+  }
+  play(speed) {
+    this.props.play();
+    this.interval = setInterval(() =>
+      this.props.updateBoard(this.props.size), speed || this.props.speed);
   }
   clearBoard() {
-    clearInterval(this.interval);
+    this.pause();
     this.props.clearBoard();
   }
   newBoard(size) {
+    this.pause();
     this.props.setSize(size);
     this.props.newBoard(size);
   }
@@ -30,8 +42,11 @@ export default class Controls extends Component {
     return (
       <div>
         <div className="row">
-          <button onClick={ () => this.toggleInterval() }>
-            Run/Pause
+          <button onClick={ () => this.play() }>
+            Play
+          </button>
+          <button onClick={ () => this.pause() }>
+            Pause
           </button>
           <button onClick={ () => this.clearBoard() }>
             Clear
@@ -39,13 +54,24 @@ export default class Controls extends Component {
         </div>
         <div className="row">
           <button onClick={ () => this.newBoard(30) }>
-            Small
+            30x30
           </button>
           <button onClick={ () => this.newBoard(60) }>
-            Medium
+            60x60
           </button>
           <button onClick={ () => this.newBoard(90) }>
-            Large
+            90x90
+          </button>
+        </div>
+        <div className="row">
+          <button onClick={ () => this.setSpeed(1000) }>
+            Slow
+          </button>
+          <button onClick={ () => this.setSpeed(500) }>
+            Medium
+          </button>
+          <button onClick={ () => this.setSpeed(50) }>
+            Fast
           </button>
         </div>
       </div>
@@ -54,29 +80,35 @@ export default class Controls extends Component {
 }
 
 Controls.propTypes = {
-  togglePlay: PropTypes.func,
-  paused: PropTypes.bool.isRequired,
+  play: PropTypes.func,
+  playing: PropTypes.bool.isRequired,
+  pause: PropTypes.func,
   clearBoard: PropTypes.func,
   newBoard: PropTypes.func,
   updateBoard: PropTypes.func,
   size: PropTypes.number,
-  setSize: PropTypes.func
+  setSize: PropTypes.func,
+  setSpeed: PropTypes.func,
+  speed: PropTypes.number
 };
 
 function mapStateToProps(state) {
   return {
-    paused: state.paused,
-    size: state.size
+    playing: state.playing,
+    size: state.size,
+    speed: state.speed
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    togglePlay,
+    play,
     clearBoard,
     newBoard,
     updateBoard,
-    setSize
+    setSize,
+    setSpeed,
+    pause
   }, dispatch);
 }
 

@@ -34,7 +34,6 @@ export default class Controls extends Component {
     this.props.clearBoard();
   }
   newBoard(size) {
-    this.pause();
     this.props.setSize(size);
     this.props.newBoard(size);
   }

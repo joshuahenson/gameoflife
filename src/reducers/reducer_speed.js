@@ -1,4 +1,4 @@
-const speed = (state = 600, action) => {
+const speed = (state = 500, action) => {
   switch (action.type) {
     case 'SET_SPEED':
       return (

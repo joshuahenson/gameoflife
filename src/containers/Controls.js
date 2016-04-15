@@ -2,44 +2,41 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  updateBoard, togglePlay, clearBoard, newBoard, setSize, setSpeed, pausePlay
+  updateBoard, play, clearBoard, newBoard, setSize, setSpeed, pause
 } from '../actions/index';
 
 export default class Controls extends Component {
   // functions are not keeping up with reducers
   componentDidMount() {
-    console.log(this.props.paused);
-    this.toggleInterval();
-    console.log(this.props.paused);
+    // console.log(this.props.playing);
+    this.play();
+    // console.log(this.props.playing);
   }
   componentWillUnmount() {
-    this.pausePlay();
-  }
-  setSpeed(speed) {
-    this.pausePlay();
-    this.props.setSpeed(speed);
-    this.toggleInterval();
-  }
-  toggleInterval() {
-    console.log('toggle1', this.props.paused);
-    if (!this.props.paused) {
-      this.interval = setInterval(() => this.props.updateBoard(this.props.size), this.props.speed);
-    } else {
-      clearInterval(this.interval);
-      console.log('toggle2', this.props.paused);
-    }
-    this.props.togglePlay();
-  }
-  pausePlay() {
-    this.props.pausePlay();
     clearInterval(this.interval);
   }
+  setSpeed(speed) {
+    if (this.props.playing) {
+      this.pause();
+      this.props.setSpeed(speed);
+      this.play(speed);
+    }
+    this.props.setSpeed(speed);
+  }
+  pause() {
+    this.props.pause();
+    clearInterval(this.interval);
+  }
+  play(speed) {
+    this.props.play();
+    this.interval = setInterval(() => this.props.updateBoard(this.props.size), speed || this.props.speed);
+  }
   clearBoard() {
-    this.pausePlay();
+    this.pause();
     this.props.clearBoard();
   }
   newBoard(size) {
-    this.pausePlay();
+    this.pause();
     this.props.setSize(size);
     this.props.newBoard(size);
   }
@@ -47,8 +44,11 @@ export default class Controls extends Component {
     return (
       <div>
         <div className="row">
-          <button onClick={ () => this.toggleInterval() }>
-            Run/Pause
+          <button onClick={ () => this.play() }>
+            Play
+          </button>
+          <button onClick={ () => this.pause() }>
+            Pause
           </button>
           <button onClick={ () => this.clearBoard() }>
             Clear
@@ -56,23 +56,23 @@ export default class Controls extends Component {
         </div>
         <div className="row">
           <button onClick={ () => this.newBoard(30) }>
-            Small
+            30x30
           </button>
           <button onClick={ () => this.newBoard(60) }>
-            Medium
+            60x60
           </button>
           <button onClick={ () => this.newBoard(90) }>
-            Large
+            90x90
           </button>
         </div>
         <div className="row">
           <button onClick={ () => this.setSpeed(1000) }>
             Slow
           </button>
-          <button onClick={ () => this.setSpeed(600) }>
+          <button onClick={ () => this.setSpeed(500) }>
             Medium
           </button>
-          <button onClick={ () => this.setSpeed(200) }>
+          <button onClick={ () => this.setSpeed(50) }>
             Fast
           </button>
         </div>
@@ -82,9 +82,9 @@ export default class Controls extends Component {
 }
 
 Controls.propTypes = {
-  togglePlay: PropTypes.func,
-  paused: PropTypes.bool.isRequired,
-  pausePlay: PropTypes.func,
+  play: PropTypes.func,
+  playing: PropTypes.bool.isRequired,
+  pause: PropTypes.func,
   clearBoard: PropTypes.func,
   newBoard: PropTypes.func,
   updateBoard: PropTypes.func,
@@ -96,7 +96,7 @@ Controls.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    paused: state.paused,
+    playing: state.playing,
     size: state.size,
     speed: state.speed
   };
@@ -104,13 +104,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    togglePlay,
+    play,
     clearBoard,
     newBoard,
     updateBoard,
     setSize,
     setSpeed,
-    pausePlay
+    pause
   }, dispatch);
 }
 

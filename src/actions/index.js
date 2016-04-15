@@ -18,15 +18,15 @@ export function newBoard(size) {
   };
 }
 
-export function togglePlay() {
+export function play() {
   return {
-    type: 'TOGGLE_PLAY'
+    type: 'PLAY'
   };
 }
 
-export function pausePlay() {
+export function pause() {
   return {
-    type: 'PAUSE_PLAY'
+    type: 'PAUSE'
   };
 }
 

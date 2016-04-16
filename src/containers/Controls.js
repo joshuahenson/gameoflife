@@ -40,7 +40,7 @@ export default class Controls extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="controls-container">
         <div className="generation">
           { `Generation: ${this.props.generation}` }
         </div>

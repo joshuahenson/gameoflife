@@ -43,7 +43,6 @@ const cellStatus = (array, index, width, cell) => {
       count++;
     }
   });
-  // todo: refactor to show if continuing to live or die?????
   if (count === 3 || count === 2 && cell) {
     return 1;
   } // else

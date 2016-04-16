@@ -18,13 +18,12 @@ export default class Board extends Component {
   }
   render() {
     return (
-      <div className="board" style={ { width: `${this.props.size * 10}px` } }>
+      <div style={ { width: `${this.props.size * 10}px` } }>
         {
           this.props.board.map((cell, index) =>
             <div
               onClick={ () => this.props.toggleCell(index) }
               key={index}
-              id={index}
               className={ this.determineClass(index, this.props.size, cell) }
             />
           )

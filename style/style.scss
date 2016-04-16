@@ -1,29 +1,60 @@
-$cellBorder: white;
-$board: darkGray;
-$alive: #bada55;
-$dead: gray;
+$primary: #6B6659;
+$secondary: #bada55;
+$tertiary: #CBCBBA;
+$alternate: #DAE9E5;
+
+
+body {
+  background-color: lighten($tertiary, 10%);
+}
 
 .container {
   text-align:center;
 }
 
-.board {
-  background-color: $board;
+.board-container {
+  background-color: $tertiary;
   padding: 5px;
   display: inline-block;
 }
+
 .alive, .dead {
   width: 10px;
   height: 10px;
-  outline: 1px solid $cellBorder;
+  outline: 1px solid white;
   float: left;
+  cursor: crosshair;
 }
+
 .dead {
-  background-color: $dead;
+  background-color: $primary;
 }
+
 .alive {
-  background-color: $alive;
+  background-color: $secondary;
 }
+
 .clear {
   clear: both;
+}
+
+.row {
+  padding: 5px 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid darken($tertiary, 10%);
+  }
+}
+button {
+  margin: 0 5px;
+  background-color: transparent;
+  // color: darken($primary, 20%);
+  border: 1px solid $primary;
+  width: 75px;
+  height: 30px;
+  &:hover:enabled {
+    cursor: pointer;
+  }
+  &:disabled {
+    color: $primary;
+  }
 }

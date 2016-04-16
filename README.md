@@ -1,4 +1,6 @@
-# WIP Conway's Game of Life
+# Conway's Game of Life
+
+[Wikipedia link](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) for more information.
 
 User Story: When I first arrive at the game, it will randomly generate a board and start playing.
 
